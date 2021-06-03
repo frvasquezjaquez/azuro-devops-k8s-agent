@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: az-devops-builder-agent
+  labels:
+    node.version: "1.0"
+spec:
+  serviceName: az-devops-builder-agent
+  replicas: 3
+  selector:
+    matchLabels:
+      app: az-devops-builder-agent
+  template:
+    metadata:
+      labels:
+        app: az-devops-builder-agent
+    spec:
+      containers:
+      - name: az-devops-builder-agent
+        image: harbor.pitafoo.com/devops/azure-agent:1.0
+        envFrom:
+          - configMapRef:
+              name: az-agent-configmap
+        volumeMounts:
+          - name: token 
+            mountPath: /tmp/azure-devops
+            readOnly: true
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      volumes:
+        - name: token 
+          secret:
+            secretName:  az-agent-pool-token

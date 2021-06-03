@@ -1,0 +1,15 @@
+version: "3"
+services:
+ agent:
+  build: .
+  environment:
+   # Azure DevOps Required Variables
+   AZP_URL: https://dev.azure.com/<organization>/ # For Azure DevOps OnPremise, use the OnPremise URL
+   AZP_TOKEN_FILE: /tmp/token
+   AZP_AGENT_NAME: my-custom-agent
+   AZP_POOL: <agent-pool-name>
+   AZP_WORK: /azp
+   #  Custom Capabilities
+   donet.version: 1.0
+  volumes:
+   - ./token:/tmp/token

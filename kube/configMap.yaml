@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: az-agent-configmap
+data:
+  AZP_URL: https://dev.azure.com/<organization>/  # For Azure DevOps OnPremise, use the OnPremise URL
+  AZP_TOKEN_FILE: /tmp/azure-devops/.token        # token inside a file when the AZP_TOKEN is not provided
+  AZP_POOL: <agent-pool-name>
+  AZP_WORK: /azp
+
+  #########################################################
+  # We can add custom variables as capabilites            #
+  # to identify our agent in the azure devops pipelines   #
+  #########################################################
+  donet.version: "1.0"

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: az-agent-pool-token
+type: Opaque
+stringData:
+  .token: <azure-devops-token-with-agent-pool-manage-permissions>
